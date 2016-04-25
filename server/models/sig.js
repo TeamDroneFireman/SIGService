@@ -1,7 +1,7 @@
 module.exports = function(Sig) {
-  Mean.disableRemoteMethod('deleteById', true);
-  Mean.disableRemoteMethod("updateAll", true);
-  Mean.disableRemoteMethod('createChangeStream', true);
-  Mean.disableRemoteMethod('findOne', true);
-  Mean.disableRemoteMethod('exists', true);
+  Sig.disableRemoteMethod('deleteById', true);
+  Sig.disableRemoteMethod('updateAll', true);
+  Sig.disableRemoteMethod('createChangeStream', true);
+  Sig.disableRemoteMethod('findOne', true);
+  Sig.disableRemoteMethod('exists', true);
 };
