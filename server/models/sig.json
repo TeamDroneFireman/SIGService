@@ -10,8 +10,8 @@
       "type": "string",
       "required": true
     },
-    "idIntervention": {
-      "type": "object",
+    "intervention": {
+      "type": "number",
       "required": true
     },
     "location": {
