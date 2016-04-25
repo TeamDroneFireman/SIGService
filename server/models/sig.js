@@ -12,7 +12,7 @@ module.exports = function(Sig) {
   */
   Sig.getByIntervention= function(id, callback) {
     Sig.find({ where: {intervention: id} }, function(err, Sigs) {
-      callback(null, drones);
+      callback(null, Sigs);
     })
   };
 
