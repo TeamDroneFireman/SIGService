@@ -1,5 +1,6 @@
 module.exports = function(Sig) {
 
+/*
   Sig.beforeRemote('*', function(ctx, unused, next) {
     Sig.app.datasources.userService
     .checkAuth(ctx.req.headers.userid, ctx.req.headers.token,
@@ -13,7 +14,8 @@ module.exports = function(Sig) {
       }
     });
   });
-  
+*/
+
   Sig.disableRemoteMethod('deleteById', true);
   Sig.disableRemoteMethod('updateAll', true);
   Sig.disableRemoteMethod('createChangeStream', true);
