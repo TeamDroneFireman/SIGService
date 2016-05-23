@@ -7,7 +7,7 @@
   },
   "properties": {
     "form": {
-      "type": "object",
+      "type": "string",
       "required": true
     },
     "intervention": {
