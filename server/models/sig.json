@@ -6,8 +6,8 @@
     "validateUpsert": true
   },
   "properties": {
-    "type": {
-      "type": "string",
+    "form": {
+      "type": "object",
       "required": true
     },
     "intervention": {
@@ -16,6 +16,10 @@
     },
     "location": {
       "type": "object",
+      "required": true
+    },
+    "role": {
+      "type": "string",
       "required": true
     }
   },
