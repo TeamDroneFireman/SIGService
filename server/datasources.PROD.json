@@ -33,7 +33,7 @@
       {
         "template": {
           "method": "GET",
-          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/SIGExterns?address={address}",
+          "url": "http://projetm2gla.istic.univ-rennes1.fr/externe/api/SIGExterns?address={address}",
           "headers": {
             "accepts": "application/json",
             "content-type": "application/json",
