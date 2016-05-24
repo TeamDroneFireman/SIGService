@@ -9,7 +9,7 @@
       "operations": [{
           "template": {
               "method": "GET",
-              "url": "http://projetm2gla.istic.univ-rennes1.fr/api/SITUsers/{userId}/accessTokens/{token}",
+              "url": "http://localhost:3000/api/SITUsers/{userId}/accessTokens/{token}",
               "headers": {
                   "accepts": "application/json",
                   "content-type": "application/json",
@@ -20,5 +20,37 @@
               "checkAuth": ["userId", "token"]
           }
       }]
+  },
+  "sigExternService": {
+    "name": "sigExternService",
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://localhost:3007/externe/api/SIGExterns?address={address}"
+        },
+        "functions": {
+          "getSigListMock": [
+            "address"
+          ]
+        }
+      }
+    ]
+  },
+  "interventionService": {
+    "name": "interventionService",
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://localhost:3001/api/interventions/{id}"
+        },
+        "functions": {
+          "findById": ["id"]
+        }
+      }
+    ]
   }
 }

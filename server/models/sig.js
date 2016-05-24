@@ -29,7 +29,18 @@ module.exports = function(Sig) {
   */
   Sig.getByIntervention= function(id, callback) {
     Sig.find({ where: {intervention: id} }, function(err, Sigs) {
-      callback(null, Sigs);
+      var sigExternService = Sig.app.dataSources.sigExternService;
+      var interventionService = Sig.app.dataSources.interventionService;
+      interventionService.findById(id, function (err, response) {
+        if (err) throw err;
+        if (response.error) next('> response error: ' + response.error.stack);
+        sigExternService.getSigListMock(response.location.address, function (err, response) {
+          if (err) throw err;
+          if (response.error) next('> response error: ' + response.error.stack);
+          Sigs.push.apply(Sigs,response);
+          callback(null, Sigs);
+        })
+      })
     });
   };
 
