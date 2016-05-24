@@ -33,7 +33,12 @@
       {
         "template": {
           "method": "GET",
-          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/SIGExterns?address={address}"
+          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/SIGExterns?address={address}",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json",
+            "Host": "sig-extern.docker.localhost"
+          }
         },
         "functions": {
           "getSigListMock": [
@@ -50,7 +55,12 @@
       {
         "template": {
           "method": "GET",
-          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/interventions/{id}"
+          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/interventions/{id}",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json",
+            "Host": "intervention.docker.localhost"
+          }
         },
         "functions": {
           "findById": ["id"]
