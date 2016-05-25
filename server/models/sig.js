@@ -34,7 +34,7 @@ module.exports = function(Sig) {
       interventionService.findById(id, function (err, response) {
         if (err) throw err;
         if (response.error) next('> response error: ' + response.error.stack);
-        sigExternService.getSigListMock(response.location.address, 
+        sigExternService.getSigListMock(response.location.address,
           function (err, response) {
           if (err) throw err;
           if (response.error) next('> response error: ' + response.error.stack);
