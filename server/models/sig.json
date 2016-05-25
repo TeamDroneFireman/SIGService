@@ -6,16 +6,24 @@
     "validateUpsert": true
   },
   "properties": {
-    "type": {
+    "form": {
       "type": "string",
       "required": true
     },
     "intervention": {
-      "type": "number",
+      "type": "string",
       "required": true
     },
     "location": {
       "type": "object",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "isExternal": {
+      "type": "boolean",
       "required": true
     }
   },

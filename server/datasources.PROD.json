@@ -9,21 +9,63 @@
     "connector": "mongodb"
   },
   "userService": {
-      "connector": "rest",
-      "debug": "false",
-      "operations": [{
-          "template": {
-              "method": "GET",
-              "url": "http://projetm2gla.istic.univ-rennes1.fr/api/SITUsers/{userId}/accessTokens/{token}",
-              "headers": {
-                  "accepts": "application/json",
-                  "content-type": "application/json",
-                  "Host": "user.docker.localhost"
-              }
-          },
-          "functions": {
-              "checkAuth": ["userId", "token"]
+    "connector": "rest",
+    "debug": "false",
+    "operations": [{
+      "template": {
+        "method": "GET",
+        "url": "http://projetm2gla.istic.univ-rennes1.fr/api/SITUsers/{userId}/accessTokens/{token}",
+        "headers": {
+          "accepts": "application/json",
+          "content-type": "application/json",
+          "Host": "user.docker.localhost"
+        }
+      },
+      "functions": {
+        "checkAuth": ["userId", "token"]
+      }
+    }]
+  },
+  "sigExternService": {
+    "name": "sigExternService",
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://projetm2gla.istic.univ-rennes1.fr/externe/api/SIGExterns?address={address}",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json",
+            "Host": "sig-extern.docker.localhost"
           }
-      }]
+        },
+        "functions": {
+          "getSigListMock": [
+            "address"
+          ]
+        }
+      }
+    ]
+  },
+  "interventionService": {
+    "name": "interventionService",
+    "connector": "rest",
+    "operations": [
+      {
+        "template": {
+          "method": "GET",
+          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/interventions/{id}",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json",
+            "Host": "intervention.docker.localhost"
+          }
+        },
+        "functions": {
+          "findById": ["id"]
+        }
+      }
+    ]
   }
 }
