@@ -27,21 +27,29 @@ module.exports = function(Sig) {
   * @param id
   * @param callback
   */
-  Sig.getByIntervention= function(id, callback) {
-    Sig.find({ where: {intervention: id} }, function(err, Sigs) {
-      var sigExternService = Sig.app.dataSources.sigExternService;
-      var interventionService = Sig.app.dataSources.interventionService;
-      interventionService.findById(id, function (err, response) {
-        if (err) throw err;
-        if (response.error) next('> response error: ' + response.error.stack);
-        sigExternService.getSigListMock(response.location.address,
-          function (err, response) {
-          if (err) throw err;
-          if (response.error) next('> response error: ' + response.error.stack);
-          Sigs.push.apply(Sigs,response);
-          callback(null, Sigs);
+  Sig.getByIntervention = function(id, callback) {
+    var interventionService = Sig.app.dataSources.interventionService;
+    interventionService.exists(id,function(err, response) {
+      if (err) throw err;
+      if (response.error) next('> response error: ' + response.error.stack);
+      if (response.exists) {
+        Sig.find({where: {intervention: id}}, function (err, Sigs) {
+          if (Sigs === null) Sigs = [];
+          var sigExternService = Sig.app.dataSources.sigExternService;
+          interventionService.findById(id, function (err, response) {
+            if (err) throw err;
+            if (response.error) next('> response error: ' + response.error.stack);
+            sigExternService.getSigListMock(response.location.address,
+              function (err, response) {
+                if (err) throw err;
+                if (response.error) next('> response error: ' + response.error.stack);
+                Sigs.push.apply(Sigs, response);
+                callback(null, Sigs);
+              });
+          });
         });
-      });
+      }
+      else callback(null, [])
     });
   };
 
@@ -50,8 +58,22 @@ module.exports = function(Sig) {
     {
       http: {path: '/intervention/:id', verb: 'get'},
       accepts: {arg: 'id', type: 'string', required: true},
-      returns: {type: 'array', root: true}
+      returns: {type: 'array', root: true},
+      rest: {after: convertNullToNotFoundError}
     }
   );
+
+
+  function convertNullToNotFoundError(ctx, cb) {
+    if (ctx.result !== null) return cb();
+
+    var modelName = ctx.method.sharedClass.name;
+    var id = ctx.getArgByName('id');
+    var msg = 'Unknown "' + modelName + '" id "' + id + '".';
+    var error = new Error(msg);
+    error.statusCode = error.status = 404;
+    error.code = 'MODEL_NOT_FOUND';
+    cb(error);
+  }
 
 };
