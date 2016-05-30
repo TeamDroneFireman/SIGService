@@ -38,18 +38,20 @@ module.exports = function(Sig) {
           var sigExternService = Sig.app.dataSources.sigExternService;
           interventionService.findById(id, function (err, response) {
             if (err) throw err;
-            if (response.error) next('> response error: ' + response.error.stack);
+            if (response.error) 
+              next('> response error: ' + response.error.stack);
             sigExternService.getSigListMock(response.location.address,
               function (err, response) {
                 if (err) throw err;
-                if (response.error) next('> response error: ' + response.error.stack);
+                if (response.error) 
+                  next('> response error: ' + response.error.stack);
                 Sigs.push.apply(Sigs, response);
                 callback(null, Sigs);
               });
           });
         });
       }
-      else callback(null, [])
+      else callback(null, []);
     });
   };
 
