@@ -50,6 +50,14 @@
         "functions": {
           "findById": ["id"]
         }
+      },{
+        "template": {
+          "method": "GET",
+          "url": "http://localhost:3001/api/interventions/{id}/exists"
+        },
+        "functions": {
+          "exists": ["id"]
+        }
       }
     ]
   }

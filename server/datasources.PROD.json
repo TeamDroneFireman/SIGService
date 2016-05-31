@@ -65,6 +65,19 @@
         "functions": {
           "findById": ["id"]
         }
+      },{
+        "template": {
+          "method": "GET",
+          "url": "http://projetm2gla.istic.univ-rennes1.fr/api/interventions/{id}/exists",
+          "headers": {
+            "accepts": "application/json",
+            "content-type": "application/json",
+            "Host": "intervention.docker.localhost"
+          }
+        },
+        "functions": {
+          "exists": ["id"]
+        }
       }
     ]
   }
