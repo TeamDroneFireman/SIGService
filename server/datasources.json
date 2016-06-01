@@ -60,5 +60,19 @@
         }
       }
     ]
+  },
+  "pushService": {
+    "connector": "rest",
+    "debug": "false",
+    "operations": [{
+      "template": {
+        "method": "POST",
+        "url": "http://localhost:3009/api/pushMessages",
+        "body": "{data}"
+      },
+      "functions": {
+        "create": ["data"]
+      }
+    }]
   }
 }
