@@ -107,7 +107,7 @@ module.exports = function(Sig) {
     var pushMessage = {
       idIntervention : sig.intervention,
       idElement : sig.id,
-      timestamp : Date.now(),
+      timestamp : new Date(Date.now()),
       topic : topic
     };
     var pushService = Sig.app.datasources.pushService;
