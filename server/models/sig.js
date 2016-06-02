@@ -83,6 +83,11 @@ module.exports = function(Sig) {
     next();
   });
 
+  Sig.afterRemote('prototype.updateAttributes',function (ctx, unused, next) {
+    sendPushMessage(ctx.result, 'Sig/Create');
+    next();
+  });
+
   Sig.afterRemote('upsert',function (ctx, unused, next) {
     sendPushMessage(ctx.result, 'Sig/Update');
     next();
